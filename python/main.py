@@ -1,4 +1,4 @@
-#THIS IS FOR TEST OF CI
+#THIS IS FOR TEST OF WORKFLOW
 
 import os
 import logging
