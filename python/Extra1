@@ -1,0 +1,126 @@
+# Word Pattern
+class Solution(object):
+    def wordPattern(self, p, s):
+        """
+        :type pattern: str
+        :type s: str
+        :rtype: bool
+        """
+        p_dict={}
+        s_dict={}
+        splited_s = s.split()
+
+        if len(p) != len(splited_s):
+            return False
+
+        i = 0
+        for n in p:
+            word = splited_s[i]
+            if n not in p_dict:
+                if word in s_dict:
+                    return False
+                p_dict[n] = word
+                s_dict[word] = n
+            else:
+                if p_dict[n] != word:
+                    return False
+            i+=1
+        return True
+
+# Find All Numbers Disappeared in an Array
+
+# Step1: O(n^2)-time and O(1)-space で解く
+class Solution(object):
+    def findDisappearedNumbers(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        missing_list = []
+        n=len(nums)
+        for i in range(1, n+1):
+            for num in nums:
+                if num == i:
+                    break
+            else:
+                missing_list.append(i)
+        return missing_list
+    
+# Step2: O(n)-time and O(n)-space で解く
+class Solution(object):
+    def findDisappearedNumbers(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        num_set = set(nums)
+        missing_list = []
+        for i in range(1, len(nums)+1):
+            if i not in num_set:
+                missing_list.append(i)
+        return missing_list
+
+            
+
+# Intersection of Two Linked Lists
+
+# Step1: O(n)-time and O(n)-space で解く
+class Solution(object):
+    def getIntersectionNode(self, headA, headB):
+        """
+        :type head1, head1: ListNode
+        :rtype: ListNode
+        """
+        if not headA or not headB:
+            return
+        seens = set()
+
+        while headA:
+            if headA not in seens:
+                seens.add(headA)
+            headA = headA.next
+        
+        while headB:
+            if headB in seens:
+                return headB
+            headB = headB.next
+        
+        return 
+
+
+
+# Step2: O(n)-time and O(1)-space で解く
+class Solution(object):
+    def getIntersectionNode(self, headA, headB):
+        """
+        :type head1, head1: ListNode
+        :rtype: ListNode
+        """
+        if not headA or not headB:
+            return
+        
+        lenA, lenB, nodeA, nodeB = 0, 0, headA, headB
+
+        while nodeA :
+            lenA +=1
+            nodeA = nodeA.next
+        while nodeB:
+            lenB += 1
+            nodeB = nodeB.next
+
+        diff = lenA - lenB
+
+        if lenA > lenB:
+            while diff > 0:
+                headA = headA.next
+                diff -= 1
+        elif lenB > lenA:
+            while diff < 0:
+                headB = headB.next
+                diff += 1
+        while headA and headB:
+            if headA == headB:
+                return headA
+            headA = headA.next
+            headB = headB.next
+        return  
